@@ -1,0 +1,25 @@
+<div *ngIf="isLoading" class="d-flex align-items-center">
+  <strong>Loading...</strong>
+  <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+</div>
+
+<ng-container *ngIf="!isLoading">
+
+      <div class="row mt-4" >
+        <div class="col-4 mt-4" *ngFor="let product of products" >
+          <div class="card">
+            <img [src]="product.imageUrl" class="card-img-top"
+            alt="Simple product">
+            <div class="card-body">
+                <h5 class="card-title" >{{product.title}}</h5>
+                <p class="card-text">{{product.description}}</p>
+          <a [routerLink]="['product',product.id]" class="btn btn-primary ml-2" (click)="details()">View Details</a>
+          <a class="btn btn-primary ml-2" (click)="del(product.id)" >Delete Item</a>
+
+      </div>
+    </div>
+    </div>
+  </div>
+  </ng-container>
+
+
