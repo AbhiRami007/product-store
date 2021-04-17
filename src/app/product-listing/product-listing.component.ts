@@ -13,10 +13,12 @@ import { ProductServiceService } from '../product-service.service';
 })
 export class ProductListingComponent implements OnInit {
 isLoading=true;
+loading;
+i;
   products: any=[];
   constructor(private productService:ProductServiceService) { }
   ngOnInit(): void {
-    this.isLoading=false;
+    this.isLoading=true;
     this.productService.getProducts().subscribe(res=>
       {
         this.products=res;
@@ -24,14 +26,30 @@ isLoading=true;
         {
           this.isLoading=false;
         }
-        console.log("data:" ,this.products);
-      })
-  }
-  del(id) {
-    var confirmation= confirm("Confirm Deletion?");
 
+        console.log("data:" ,this.products);
+      },
+      err =>{console.log (err)},
+    ()=> { this.isLoading  = false; this.loading=false;})
+
+  }
+  del(pid) {
+
+    var confirmation= confirm("Confirm Deletion?");
+    if(!confirmation)
+    {
+      this.loading=false;
+    }
      if(confirmation){
-             this.productService.deleteProduct(id);
+      this.loading=true;
+
+    this.productService.deleteProduct(pid).subscribe(res=>
+      {
+        this.loading=false;
+      },
+      err =>{console.log (err)},
+    ()=> { this.loading=true;})
+
              setTimeout(
               function(){
               location.reload();

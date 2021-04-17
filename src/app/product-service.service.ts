@@ -27,16 +27,7 @@ export class ProductServiceService {
     }
 
     deleteProduct(id){
-      console.log("value",id)
-      this.httpClient.delete(this.baseUrl+ 'product/'+id)
-          .subscribe({
-              next: data => {
-                  this.status = 'Deletion successful';
-              },
-              error: error => {
-                  this.err = error.message;
-                  console.error('An error occured!', error);
-              }
-          });
+      return this.httpClient.delete(this.baseUrl+ 'product/'+id)
+
     }
 }

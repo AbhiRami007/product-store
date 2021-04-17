@@ -1,3 +1,10 @@
+<div   style ="text-align: center;"   *ngIf ="isLoading ">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  </div>
+
+  <ng-container *ngIf="!isLoading">
 <form [formGroup]="addItemData" (ngSubmit)="addItem()">
   <div class="input-group mb-3">
     <input type="text" class="form-control" placeholder="Enter image Url" formControlName="imageUrl"  aria-label="Username" aria-describedby="basic-addon1" />
@@ -11,7 +18,9 @@
 
 <a [routerLink]="'/'" class="btn btn-primary ml-2" (click)="addItem()" >Add Data</a>
 
+
 </form>
+</ng-container>
 
 
 
